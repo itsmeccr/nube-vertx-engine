@@ -2,10 +2,7 @@ package io.nubespark.impl.handlers;
 
 import io.netty.handler.codec.http.HttpResponseStatus;
 import io.nubespark.Role;
-import io.nubespark.utils.CustomMessage;
-import io.nubespark.utils.HttpException;
-import io.nubespark.utils.MongoUtils;
-import io.nubespark.utils.StringUtils;
+import io.nubespark.utils.*;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
@@ -26,7 +23,7 @@ public class BaseCollectionHandler {
                     .subscribe(response -> {
                         CustomMessage<JsonObject> replyMessage = new CustomMessage<>(
                             null,
-                            response,
+                            SQLUtils.getFirstNotNull(response, new JsonObject()),
                             HttpResponseStatus.OK.code());
                         message.reply(replyMessage);
                     }, throwable -> handleException(message, throwable));
