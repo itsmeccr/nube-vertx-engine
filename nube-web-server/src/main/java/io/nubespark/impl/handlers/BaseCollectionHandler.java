@@ -8,6 +8,8 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.reactivex.ext.mongo.MongoClient;
 
+import java.util.UUID;
+
 import static io.nubespark.utils.CustomMessageResponseHelper.handleBadRequestResponse;
 import static io.nubespark.utils.CustomMessageResponseHelper.handleForbiddenResponse;
 
@@ -38,14 +40,13 @@ public class BaseCollectionHandler {
     public void handlePostUrl(Message<Object> message, CustomMessage customMessage, MongoClient mongoClient) {
         String role = customMessage.getHeader().getJsonObject("user").getString("role");
         String collection = customMessage.getHeader().getString("collection");
-        String id = customMessage.getHeader().getString("url");
         String siteId = customMessage.getHeader().getString("Site-Id");
         JsonArray sitesIds = getSitesIds(customMessage);
         if (sitesIds.size() == 0) {
             handleBadRequestResponse(message, "User must be associated with <SiteSetting>");
         } else if (!role.equals(Role.GUEST.toString())) {
             if (sitesIds.contains(siteId)) {
-                handlePostDocument(message, customMessage, mongoClient, collection, id, siteId);
+                handlePostDocument(message, customMessage, mongoClient, collection, siteId);
             } else {
                 handleForbiddenResponse(message);
             }
@@ -54,7 +55,8 @@ public class BaseCollectionHandler {
         }
     }
 
-    protected void handlePostDocument(Message<Object> message, CustomMessage customMessage, MongoClient mongoClient, String collection, String id, String siteId) {
+    private void handlePostDocument(Message<Object> message, CustomMessage customMessage, MongoClient mongoClient, String collection, String siteId) {
+        String id = UUID.randomUUID().toString();
         mongoClient.rxFind(collection, new JsonObject().put("site_id", siteId).put("id", id))
             .map(response -> {
                 JsonObject body = (JsonObject) customMessage.getBody();
@@ -165,7 +167,7 @@ public class BaseCollectionHandler {
         return sitesIds;
     }
 
-    protected void handleException(Message<Object> message, Throwable throwable) {
+    private void handleException(Message<Object> message, Throwable throwable) {
         HttpException exception = (HttpException) throwable;
         CustomMessage<JsonObject> replyMessage = new CustomMessage<>(
             null,
