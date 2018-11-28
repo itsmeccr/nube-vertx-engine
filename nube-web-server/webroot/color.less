@@ -2405,6 +2405,11 @@ i.trigger:hover {
 .pageHeader .title {
   color: @heading-color;
 }
+
+:global .ant-tabs-bar {
+  background-color: white;
+  box-shadow: inset 1px 4px 9px -6px;
+}
 :global .react-grid-item {
   background: #fff;
 }
@@ -2493,29 +2498,13 @@ i.trigger:hover {
 :global .nube-form-item-footer {
   border-top: 1px solid #dde4ed;
 }
-.numberInfo .suffix {
+
+.mainContainer .topicTitle {
   color: @text-color;
 }
-.numberInfo .numberInfoTitle {
-  color: @text-color;
-}
-.numberInfo .numberInfoSubTitle {
-  color: @text-color-secondary;
-}
-.numberInfo .numberInfoValue > span {
+
+.mainContainer .topicValue > span {
   color: @heading-color;
-}
-.numberInfo .numberInfoValue .subTotal {
-  color: @text-color-secondary;
-}
-.numberInfo .numberInfoValue .subTotal :global .anticon-caret-up {
-  color: #52c41a;
-}
-.numberInfo .numberInfoValue .subTotal :global .anticon-caret-down {
-  color: #f5222d;
-}
-.numberInfolight .numberInfoValue > span {
-  color: @text-color;
 }
 :global .rangeslider {
   background: #e6e6e6;
@@ -2577,6 +2566,18 @@ i.trigger:hover {
   box-shadow: none !important;
   -webkit-box-shadow: none !important;
 }
+
+:global .weather-two-box {
+  background: #fff;
+  border-radius: 4px;
+}
+
+:global .weather-two-box .weather-header {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  background-color: #02b0f1;
+  color: white;
+}
 .result .icon > .success {
   color: #52c41a;
 }
@@ -2633,6 +2634,11 @@ i.trigger:hover {
 .standardFormRowLast {
   border: none;
 }
+
+:global .editable-row:hover .editable-cell-value-wrap {
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+}
 .trendItem .up {
   color: #f5222d;
 }
@@ -2642,6 +2648,25 @@ i.trigger:hover {
 .trendItem.trendItemGrey .up,
 .trendItem.trendItemGrey .down {
   color: @text-color;
+}
+
+:global .autocomplete-dropdown-container {
+  color: @text-color;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+
+:global .suggestion-item {
+  color: @text-color;
+}
+
+:global .suggestion-item:first-child {
+  border-radius: 4px 4px 0 0;
+}
+
+:global .suggestion-item:last-child {
+  border-radius: 4px 4px 0 0;
 }
 .sidebarTab {
   background-color: #fff;
@@ -7819,6 +7844,25 @@ li.ant-tree-treenode-disabled > .ant-tree-node-content-wrapper:hover {
 }
 .ant-upload-list .ant-upload-success-icon {
   color: #52c41a;
+}
+
+:global .autocomplete-dropdown-container {
+  color: @text-color;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+
+:global .suggestion-item {
+  color: @text-color;
+}
+
+:global .suggestion-item:first-child {
+  border-radius: 4px 4px 0 0;
+}
+
+:global .suggestion-item:last-child {
+  border-radius: 4px 4px 0 0;
 }
 .sidebarTab {
   background-color: #fff;
